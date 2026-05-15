@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Headquarters Visitor Entry</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <div class="form-container">
+        <div class="form-header">
+            <div class="logo-placeholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+            </div>
+            <h1>Visitor Registration</h1>
+            <p>Police Headquarters Official Entry Form</p>
+        </div>
+
+        <form id="registrationForm" onsubmit="return submitForm(event)">
+            <!-- Visitor Details Section -->
+            <fieldset class="form-section">
+                <legend>Visitor Details</legend>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="input-field">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="example@email.com">
+                    </div>
+                    <div class="input-field">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-field full-width">
+                    <label for="address">Residential Address</label>
+                    <textarea id="address" name="address" rows="2" required placeholder="Enter your complete address"></textarea>
+                </div>
+            </fieldset>
+
+            <!-- ID Verification Section -->
+            <fieldset class="form-section">
+                <legend>ID Verification</legend>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="idType">ID Proof Type</label>
+                        <select id="idType" name="idType" required onchange="updateIdFormat()">
+                            <option value="" disabled selected>Select ID Proof</option>
+                            <option value="aadhar">Aadhar Card</option>
+                            <option value="pan">PAN Card</option>
+                            <option value="dl">Driving License</option>
+                            <option value="voter">Voter ID</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <label for="idNumber">ID Number</label>
+                        <input type="text" id="idNumber" name="idNumber" required placeholder="Enter ID number">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Visit Details Section -->
+            <fieldset class="form-section">
+                <legend>Visit Details</legend>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="department">Department to Visit</label>
+                        <select id="department" name="department" required>
+                            <option value="" disabled selected>Select Department</option>
+                            <option value="cyber">Cyber Crime</option>
+                            <option value="traffic">Traffic Division</option>
+                            <option value="narcotics">Narcotics Bureau</option>
+                            <option value="general">General Administration</option>
+                            <option value="fir">FIR Registration</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <label for="officer">Officer to Meet (Optional)</label>
+                        <input type="text" id="officer" name="officer" placeholder="Name of officer">
+                    </div>
+                </div>
+                <div class="input-field full-width">
+                    <label for="purpose">Purpose of Visit</label>
+                    <textarea id="purpose" name="purpose" rows="2" required placeholder="Briefly describe the purpose of your visit"></textarea>
+                </div>
+            </fieldset>
+
+            <!-- Security Details Section -->
+            <fieldset class="form-section">
+                <legend>Security Details</legend>
+                <div class="checkbox-group full-width">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="hasMobile" name="items" value="Mobile">
+                        <span class="checkmark"></span>
+                        Mobile Phone
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="hasLaptop" name="items" value="Laptop">
+                        <span class="checkmark"></span>
+                        Laptop
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="hasBag" name="items" value="Bag">
+                        <span class="checkmark"></span>
+                        Bag/Briefcase
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="hasVehicle" name="items" value="Vehicle" onchange="toggleVehicleInput()">
+                        <span class="checkmark"></span>
+                        Vehicle
+                    </label>
+                </div>
+                
+                <div class="input-field full-width" id="vehicleNumberContainer" style="display: none;">
+                    <label for="vehicleNumber">Vehicle Number</label>
+                    <input type="text" id="vehicleNumber" name="vehicleNumber" placeholder="e.g., MH 12 AB 1234">
+                </div>
+            </fieldset>
+
+            <button type="submit" class="submit-btn">
+                <span>Submit Registration</span>
+                <div class="loader"></div>
+            </button>
+            <div id="formMessage" class="form-message"></div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
